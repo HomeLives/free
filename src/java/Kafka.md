@@ -386,7 +386,7 @@ Kafka 消费者和 coordinator 之间连接超时时间，默认 45s。超过该
 
 #### 4.1、生产者提高吞吐量
 
-<img src="./image/Kafka/生产者提高吞吐量.jpg" style="zoom:67%;" />
+<img src="./image/生产者提高吞吐量.jpg" style="zoom:67%;" />
 
 ```tex
 batch.size：默认16384(16k)，提高批次大小。
