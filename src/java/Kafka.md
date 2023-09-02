@@ -27,29 +27,29 @@ Kafka最新定义:Kafka是一个开源的分布式事件流平台（Event Stream
 
 #### 1、缓存/消峰
 
-<img src="image/缓冲消峰.jpg" style="zoom: 67%;" />
+<img src="./image/缓冲消峰.jpg" style="zoom: 67%;" />
 
 #### 2、解耦
 
-<img src="image/解耦.jpg" style="zoom: 67%;" />
+<img src="./image/解耦.jpg" style="zoom: 67%;" />
 
 #### 3、异步通信
 
-<img src="image/异步通信.jpg" style="zoom: 67%;" />
+<img src="./image/异步通信.jpg" style="zoom: 67%;" />
 
 ### 1.4 消息队列的两种消费方式
 
 #### 1、点对点模式
 
-<img src="image/点对点模式.jpg" style="zoom:67%;" />
+<img src="./image/点对点模式.jpg" style="zoom:67%;" />
 
 #### 2、发布订阅模式
 
-<img src="image/发布订阅模式.jpg" style="zoom:67%;" />
+<img src="./image/发布订阅模式.jpg" style="zoom:67%;" />
 
 ### 1.5 Kafka基础架构
 
-<img src="image/Kafka基础架构.jpg" style="zoom:67%;" />
+<img src="./image/Kafka基础架构.jpg" style="zoom:67%;" />
 
 #### 1、Producer
 
@@ -113,7 +113,7 @@ Consumer Group (CG):消费者组，由多个consumer组成。消费者组内每�
 在消息发送的过程中，涉及到了两个线程——main 线程和 Sender 线程。在 main 线程中创建了一个双端队列 RecordAccumulator。main 线程将消息发送给 RecordAccumulator，Sender线程不断从RecordAccumulator中拉取消息发送到 Kafka Broker。
 ```
 
-<img src="image/发送原理.jpg" style="zoom:67%;" />
+<img src="./image/发送原理.jpg" style="zoom:67%;" />
 
 #### 2.2、生产者重要参数
 
@@ -210,7 +210,7 @@ Kafka集群地址，可以设置一个或多个，中间用逗号分隔。
 2、提高并行度，生产者可以以分区为单位发送数据；消费者可以以分区为单位进行消费数据。
 ```
 
-<img src="image/提高并行度.png" style="zoom:67%;" />
+<img src="./image/提高并行度.png" style="zoom:67%;" />
 
 ##### 2、默认的分区器
 
@@ -282,7 +282,7 @@ Kafka没有采用这种方式，因为由broker决定消息发送速率，很难
 • 消费者组之间互不影响。所有的消费者都属于某个消费者组，即消费者组是逻辑上的一个订阅者。
 ```
 
-<img src="image/消费者组.jpg" style="zoom:67%;" />
+<img src="./image/消费者组.jpg" style="zoom:67%;" />
 
 > 注意点：
 
@@ -386,7 +386,7 @@ Kafka 消费者和 coordinator 之间连接超时时间，默认 45s。超过该
 
 #### 4.1、生产者提高吞吐量
 
-<img src="image/Kafka/生产者提高吞吐量.jpg" style="zoom:67%;" />
+<img src="./image/Kafka/生产者提高吞吐量.jpg" style="zoom:67%;" />
 
 ```tex
 batch.size：默认16384(16k)，提高批次大小。
@@ -397,7 +397,7 @@ buffer.memory：缓冲区大小，默认为33554432(32m)，修改为64m
 
 #### 4.2、数据可靠性
 
-<img src="image/发送原理.jpg" style="zoom:67%;" />
+<img src="./image/发送原理.jpg" style="zoom:67%;" />
 
 ```tex
 acks=0，生产者发送过来数据就不管了，可靠性差，效率高；
@@ -436,7 +436,7 @@ Kafka 0.11版本以后，引入了一项重大特性：幂等性和事务。
 
 ##### 3、幂等性
 
-<img src="image/幂等性.jpg" style="zoom:67%;" />
+<img src="./image/幂等性.jpg" style="zoom:67%;" />
 
 > 幂等性原理
 
@@ -453,7 +453,7 @@ Kafka 0.11版本以后，引入了一项重大特性：幂等性和事务。
 
 ##### 4、生产者事务
 
-<img src="image/事务.jpg" style="zoom:67%;" />
+<img src="./image/事务.jpg" style="zoom:67%;" />
 
 > 注意：开启事务，必须开启幂等性并设置一个transacation.id。
 
@@ -477,7 +477,7 @@ Kafka 0.11版本以后，引入了一项重大特性：幂等性和事务。
 >
 > 原因说明：因为在kafka1.x以后，启用幂等后，kafka服务端会缓存producer发来的最近5个request的元数据，故无论如何，都可以保证最近5个request的数据都是有序的。
 
-<img src="image/数据有序.jpg" style="zoom:67%;" />
+<img src="./image/数据有序.jpg" style="zoom:67%;" />
 
 ==个人发现一个现象，开启`Kafka`事务后，数据库`Mysql`事务失效了。==
 
@@ -700,6 +700,6 @@ public class DataSourceTransactionManagerAutoConfiguration {
 }
 ```
 
-<img src="image/Mysql事务失效.jpg" style="zoom:100%;" />
+<img src="./image/Mysql事务失效.jpg" style="zoom:100%;" />
 
 因为@ConditionalOnMissingBean(PlatformTransactionManager.class)的作用是如果容器中已经有TransactionManager类型的bean的话则不创建DataSourceTransactionManager，所以kafka开启事务后创建了kafkaTransactionManager故不再创建DataSourceTransactionManager，所以数据库事务失效了。
